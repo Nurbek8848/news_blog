@@ -1,3 +1,0 @@
-
-class ArticlesDB:
-    articles = []
