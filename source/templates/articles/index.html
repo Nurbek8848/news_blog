@@ -41,7 +41,7 @@
                         <p class="card-text">
                             {% if article.content %}{{ article.content|truncatewords:5 }}{% else %}---{% endif %}</p>
                         <span>Автор: {% if article.author %}{{ article.author }}{% else %}---{% endif %}</span>
-                        <a href="/article/?id={{ article.id }}" class="card-link mt-auto ms-auto">Подробнее</a>
+                        <a href="/article/{{ article.id }}/" class="card-link mt-auto ms-auto">Подробнее</a>
                     </div>
                 </div>
             </div>

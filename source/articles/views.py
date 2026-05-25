@@ -1,5 +1,5 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponseNotFound
+from django.shortcuts import render, get_object_or_404, redirect
 
 from articles.articles_db import ArticlesDB
 from articles.models import Article
@@ -14,17 +14,11 @@ def articles(request):
     return render(request, "articles/index.html", context)
 
 
-def article(request):
-    id = request.GET.get('id')
+def article(request, *args, pk, **kwargs):
+    article = get_object_or_404(Article, pk=pk)
+    context = {'article': article}
+    return render(request, "articles/article_view.html", context)
 
-    if id:
-        try:
-            article = Article.objects.get(id=int(id))
-            context = {'article': article}
-            return render(request, "articles/article_view.html", context)
-        except Article.DoesNotExist:
-            return HttpResponseRedirect("/articles")
-    return HttpResponseRedirect("/articles")
 
 def article_create_view(request):
     if request.method == 'GET':
