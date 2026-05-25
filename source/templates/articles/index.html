@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block nav %}
-    <a class="nav-link" href="/articles/add/">Добавить статью</a>
+    <a class="nav-link" href="{% url 'create' %}">Добавить статью</a>
 {% endblock %}
 {% block content %}
     <div class="border rounded-3 my-4 p-3">
@@ -18,7 +18,7 @@
                         <p class="card-text">
                             {% if article.content %}{{ article.content|truncatewords:5 }}{% else %}---{% endif %}</p>
                         <span>Автор: {% if article.author %}{{ article.author }}{% else %}---{% endif %}</span>
-                        <a href="/article/{{ article.id }}/" class="card-link mt-auto ms-auto">Подробнее</a>
+                        <a href="{% url 'detail' article.pk %}" class="card-link mt-auto ms-auto">Подробнее</a>
                     </div>
                 </div>
             </div>

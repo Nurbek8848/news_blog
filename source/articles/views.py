@@ -1,15 +1,10 @@
-from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404, redirect
 
-from articles.articles_db import ArticlesDB
 from articles.models import Article
 
 
-# Create your views here.
-
-
 def articles(request):
-    articles = Article.objects.all()
+    articles = Article.objects.all().order_by('-created_at')
     context = {'articles': articles}
     return render(request, "articles/index.html", context)
 
@@ -24,9 +19,10 @@ def article_create_view(request):
     if request.method == 'GET':
         return render(request, 'articles/article_create.html')
     elif request.method == 'POST':
-        Article.objects.create(
+        article = Article.objects.create(
             title=request.POST.get("title"),
             content=request.POST.get("content"),
             author=request.POST.get("author"),
         )
-        return HttpResponseRedirect("/articles")
+        return redirect("detail", pk=article.pk)
+        # return redirect("list")
