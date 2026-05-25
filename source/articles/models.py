@@ -8,6 +8,7 @@ class Article(models.Model):
     author = models.CharField(max_length=100, null=False, blank=False, verbose_name="Автор")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата редактирования")
+    moderated_at = models.DateTimeField(null=True, blank=True, verbose_name="Дата модерации")
 
     def __str__(self):
         return self.title
