@@ -15,11 +15,6 @@
                               style="height: 100px"></textarea>
                     <label for="content">Описание</label>
                 </div>
-                <select class="form-select mb-3" aria-label="Выбор блога" name="blog_id">
-                    {% for blog in blogs %}
-                        <option value="{{ blog.pk }}">{{ blog.title }}</option>
-                    {% endfor %}
-                </select>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="author" name="author" placeholder="Автор">
                     <label for="author">Автор</label>

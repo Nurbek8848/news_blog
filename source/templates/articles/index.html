@@ -9,6 +9,7 @@
     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for article in articles %}
             <div class="col">
+            <a href="{% url 'detail' article.pk %}" class="card-link">
                 <div class="card border-secondary h-100 mb-3">
                     <div class="card-header d-flex justify-content-between">
                         <h5 class="card-title">{{ article.title }}</h5>
@@ -19,9 +20,9 @@
                             {% if article.content %}{{ article.content|truncatewords:5 }}{% else %}---{% endif %}</p>
                         <p>Статус: {{ article.get_status_display }}</p>
                         <span>Автор: {% if article.author %}{{ article.author }}{% else %}---{% endif %}</span>
-                        <a href="{% url 'detail' article.pk %}" class="card-link mt-auto ms-auto">Подробнее</a>
                     </div>
                 </div>
+            </a>
             </div>
         {% empty %}
             <p>Нет данных</p>
