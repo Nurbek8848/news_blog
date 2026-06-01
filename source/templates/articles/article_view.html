@@ -10,8 +10,12 @@
                 <blockquote class="blockquote">
                     <p>{{ article.content }}</p>
                 </blockquote>
+                <p>Статус: {{ article.get_status_display }}</p>
+                <p>Блог: {{ article.blog }}</p>
+                <p>Блог: {{ article.blog.title }}</p>
+                <p>Блог: {{ article.blog.articles.all }}</p>
                 <figcaption class="blockquote-footer mt-3">
-                    {{ article.author }}
+                    Автор: {{ article.author }}
                 </figcaption>
             </figure>
         </div>

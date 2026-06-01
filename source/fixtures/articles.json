@@ -7,7 +7,8 @@
         "content": "Описание 1",
         "author": "Автор 1",
         "created_at": "2026-05-21T13:39:08.486Z",
-        "updated_at": "2026-05-21T13:39:08.486Z"
+        "updated_at": "2026-05-28T13:22:33.061Z",
+        "status": "approved"
     }
 },
 {
@@ -18,7 +19,8 @@
         "content": "Описание 2",
         "author": "Автор 2",
         "created_at": "2026-05-21T13:39:24.568Z",
-        "updated_at": "2026-05-21T13:39:24.568Z"
+        "updated_at": "2026-05-28T13:22:33.063Z",
+        "status": "approved"
     }
 },
 {
@@ -29,7 +31,8 @@
         "content": "Описание 3",
         "author": "Автор 3",
         "created_at": "2026-05-21T14:03:05.347Z",
-        "updated_at": "2026-05-21T14:03:05.347Z"
+        "updated_at": "2026-05-28T13:22:33.063Z",
+        "status": "approved"
     }
 },
 {
@@ -40,7 +43,8 @@
         "content": null,
         "author": "Автор 1",
         "created_at": "2026-05-21T14:22:00.846Z",
-        "updated_at": "2026-05-21T14:22:00.846Z"
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "approved"
     }
 },
 {
@@ -51,7 +55,8 @@
         "content": "Описание 5",
         "author": "",
         "created_at": "2026-05-21T14:23:26.182Z",
-        "updated_at": "2026-05-21T14:26:20.298Z"
+        "updated_at": "2026-05-21T14:26:20.298Z",
+        "status": "new"
     }
 },
 {
@@ -62,7 +67,8 @@
         "content": "описание 6",
         "author": "Автор 1",
         "created_at": "2026-05-21T14:28:20.451Z",
-        "updated_at": "2026-05-21T14:28:20.451Z"
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "approved"
     }
 },
 {
@@ -73,7 +79,8 @@
         "content": "описание 7",
         "author": "Автор 1",
         "created_at": "2026-05-21T14:30:13.558Z",
-        "updated_at": "2026-05-21T14:30:13.558Z"
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "approved"
     }
 },
 {
@@ -84,7 +91,8 @@
         "content": "описание 8",
         "author": "Автор 2",
         "created_at": "2026-05-21T14:30:17.644Z",
-        "updated_at": "2026-05-21T14:30:17.644Z"
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "approved"
     }
 },
 {
@@ -95,7 +103,92 @@
         "content": "Описание 9",
         "author": "Автор 2",
         "created_at": "2026-05-21T14:31:03.035Z",
-        "updated_at": "2026-05-21T14:31:03.035Z"
+        "updated_at": "2026-05-28T13:22:33.064Z",
+        "status": "approved"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 10,
+    "fields": {
+        "title": "qweqe",
+        "content": "qweqwe",
+        "author": "qweqwe",
+        "created_at": "2026-05-25T13:11:14.074Z",
+        "updated_at": "2026-05-25T13:11:14.074Z",
+        "status": "new"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 11,
+    "fields": {
+        "title": "asdgahgsdads",
+        "content": "asdasdasd",
+        "author": "asdadsas",
+        "created_at": "2026-05-25T13:46:38.845Z",
+        "updated_at": "2026-05-25T13:46:38.845Z",
+        "status": "new"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 12,
+    "fields": {
+        "title": "uiyuiyu",
+        "content": "hkhjkhsda",
+        "author": "bnbnbn",
+        "created_at": "2026-05-25T13:47:41.090Z",
+        "updated_at": "2026-05-25T13:47:41.090Z",
+        "status": "new"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 13,
+    "fields": {
+        "title": "qqweqewqwe",
+        "content": "asdasd\r\nasdasd\r\nzxczxc",
+        "author": "zxczxc",
+        "created_at": "2026-05-25T14:32:39.167Z",
+        "updated_at": "2026-05-25T14:32:39.167Z",
+        "status": "new"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 14,
+    "fields": {
+        "title": "asdasd",
+        "content": "asdasd",
+        "author": "asdasd",
+        "created_at": "2026-05-27T13:17:11.951Z",
+        "updated_at": "2026-05-28T13:25:51.762Z",
+        "status": "new"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 18,
+    "fields": {
+        "title": "sadasd",
+        "content": "asdadsas",
+        "author": "asdasd",
+        "created_at": "2026-05-28T13:44:27.454Z",
+        "updated_at": "2026-05-28T13:44:27.454Z",
+        "status": "new"
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 19,
+    "fields": {
+        "title": "sadasd",
+        "content": "asdadsas",
+        "author": "asdasd",
+        "created_at": "2026-05-28T13:45:41.749Z",
+        "updated_at": "2026-05-28T13:45:41.749Z",
+        "status": "new"
     }
 }
 ]
