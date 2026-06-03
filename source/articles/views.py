@@ -25,12 +25,7 @@ def article_create_view(request):
     elif request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
-            article = Article(
-                title=form.cleaned_data.get("title"),
-                content=form.cleaned_data.get("content"),
-                author=form.cleaned_data.get("author"),
-            )
-            article.save()
+            article = form.save()
             return redirect("detail", pk=article.pk)
         else:
             return render(request, 'articles/article_create.html', {'form': form})
@@ -39,24 +34,15 @@ def article_create_view(request):
 
 def article_update_view(request, pk, *args, **kwargs):
     article = get_object_or_404(Article, pk=pk)
-    form = ArticleForm(
-        initial={
-            'title': article.title,
-            'author': article.author,
-            'content': article.content
-        })
+    form = ArticleForm(instance=article)
     context = {'form': form}
 
     if request.method == 'GET':
-        context['action'] = reverse("update", kwargs={'pk': article.pk})
         return render(request, 'articles/article_update.html', context)
     elif request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
-            article.title=form.cleaned_data.get("title")
-            article.content=form.cleaned_data.get("content")
-            article.author=form.cleaned_data.get("author")
-            article.save()
+            article = form.save()
             return redirect("detail", pk=article.pk)
         return render(request, 'articles/article_update.html', {'form': form})
 

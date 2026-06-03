@@ -14,6 +14,7 @@
                 <figcaption class="blockquote-footer mt-3">
                     Автор: {{ article.author }}
                 </figcaption>
+                <p>Блог: {% if article.blog %}{{ article.blog.title }}{% else %}---{% endif %}</p>
             </figure>
         </div>
         <div class="text-end me-3 mb-3">

@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'articles',
+
+    'django_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -121,7 +123,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
+TIME_ZONE = 'UTC'
+USE_I18N = True
 
 TIME_ZONE = 'UTC'
 
