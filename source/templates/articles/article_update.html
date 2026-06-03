@@ -4,7 +4,7 @@
     <div class="card my-5">
         <div class="card-header fs-4 text-center py-3">Создание статьи</div>
         <div class="card-body">
-            {% include 'partial/article_form.html' %}
+            {% include 'partial/article_form.html' with action=action %}
         </div>
         <div class="card-footer text-end py-3">
             <button type="submit" form="article-form" class="btn btn-sm btn-primary">Сохранить</button>

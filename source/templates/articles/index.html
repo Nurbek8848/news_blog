@@ -10,7 +10,7 @@
         {% for article in articles %}
             <div class="col">
             <a href="{% url 'detail' article.pk %}" class="card-link">
-                <div class="card border-secondary h-100 mb-3">
+                <div class="card card-list border-secondary h-100 mb-3">
                     <div class="card-header d-flex justify-content-between">
                         <h5 class="card-title">{{ article.title }}</h5>
                         <span>{{ article.created_at| date:'Y-m-d' }}</span>
@@ -21,6 +21,14 @@
                         <p>Статус: {{ article.get_status_display }}</p>
                         <span>Автор: {% if article.author %}{{ article.author }}{% else %}---{% endif %}</span>
                     </div>
+                    <div class="text-end me-3">
+                        <a href="{% url 'update' article.pk %}" class="btn btn-outline-warning">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#article-{{ article.pk }}-Modal">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </div>
                 </div>
             </a>
             </div>
@@ -28,4 +36,7 @@
             <p>Нет данных</p>
         {% endfor %}
     </div>
+    {% for article in articles %}
+        {% include 'partial/article_delete_modal.html' with article=article %}
+    {% endfor %}
 {% endblock %}
