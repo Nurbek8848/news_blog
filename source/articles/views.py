@@ -40,7 +40,7 @@ def article_update_view(request, pk, *args, **kwargs):
     if request.method == 'GET':
         return render(request, 'articles/article_update.html', context)
     elif request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, instance=article)
         if form.is_valid():
             article = form.save()
             return redirect("detail", pk=article.pk)
