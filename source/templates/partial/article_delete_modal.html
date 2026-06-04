@@ -7,13 +7,13 @@
                 </div>
                 <div class="modal-body">
                     <p>Вы уверены что хотите удалить статтью "{{ article.title }}"</p>
-                    <form action="{% url 'delete' article.pk %}" id="delete-form" method="post">
+                    <form action="{% url 'delete' article.pk %}" id="delete-form-{{ article.pk }}" method="post">
                         {% csrf_token %}
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="submit" form="delete-form" class="btn btn-primary">Удалить</button>
+                    <button type="submit" form="delete-form-{{ article.pk }}" class="btn btn-primary">Удалить</button>
                 </div>
             </div>
         </div>

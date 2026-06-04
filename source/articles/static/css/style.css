@@ -216,3 +216,7 @@ body {
 .title {
     border: 2px dashed var(--color-border-strong);
 }
+
+.form-floating textarea#id_content {
+    min-height: 150px;
+}

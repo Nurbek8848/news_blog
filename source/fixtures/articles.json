@@ -121,19 +121,6 @@
 },
 {
     "model": "articles.article",
-    "pk": 9,
-    "fields": {
-        "title": "Статья 91",
-        "content": "Описание 9",
-        "author": "Автор 2",
-        "created_at": "2026-05-21T14:31:03.035Z",
-        "updated_at": "2026-06-03T09:48:32.083Z",
-        "status": "moderated",
-        "blog": null
-    }
-},
-{
-    "model": "articles.article",
     "pk": 27,
     "fields": {
         "title": "Статья 9",
@@ -143,110 +130,6 @@
         "updated_at": "2026-06-03T09:49:29.678Z",
         "status": "new",
         "blog": null
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 28,
-    "fields": {
-        "title": "Статья 9qwqw",
-        "content": "Описание 9aas",
-        "author": "Автор 2",
-        "created_at": "2026-06-03T09:49:41.372Z",
-        "updated_at": "2026-06-03T09:49:41.373Z",
-        "status": "new",
-        "blog": null
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 29,
-    "fields": {
-        "title": "qeqweq",
-        "content": "qweqwe",
-        "author": "qweqwe",
-        "created_at": "2026-06-03T13:19:13.201Z",
-        "updated_at": "2026-06-03T13:19:13.201Z",
-        "status": "new",
-        "blog": null
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 30,
-    "fields": {
-        "title": "статья 100",
-        "content": "Описание",
-        "author": "Автор 100",
-        "created_at": "2026-06-03T13:24:21.066Z",
-        "updated_at": "2026-06-03T13:24:21.066Z",
-        "status": "new",
-        "blog": 1
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 31,
-    "fields": {
-        "title": "статья 10012",
-        "content": "Описание 12",
-        "author": "Автор 100",
-        "created_at": "2026-06-03T13:26:22.719Z",
-        "updated_at": "2026-06-03T13:26:22.719Z",
-        "status": "approved",
-        "blog": 2
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 32,
-    "fields": {
-        "title": "Статья 101",
-        "content": "чисьмичьтмс",
-        "author": "Автор 100",
-        "created_at": "2026-06-03T13:32:17.279Z",
-        "updated_at": "2026-06-03T13:32:17.279Z",
-        "status": "new",
-        "blog": 1
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 33,
-    "fields": {
-        "title": "Статья 102",
-        "content": "",
-        "author": "Автор 102",
-        "created_at": "2026-06-03T13:42:42.627Z",
-        "updated_at": "2026-06-03T13:42:42.627Z",
-        "status": "new",
-        "blog": 1
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 35,
-    "fields": {
-        "title": "asdasd",
-        "content": "asdasdasdasd",
-        "author": "asdasd",
-        "created_at": "2026-06-03T13:59:07.513Z",
-        "updated_at": "2026-06-03T13:59:07.513Z",
-        "status": "new",
-        "blog": 1
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 36,
-    "fields": {
-        "title": "Заголовок тест блог 1",
-        "content": "",
-        "author": "ываваыв",
-        "created_at": "2026-06-03T14:10:01.139Z",
-        "updated_at": "2026-06-03T14:10:01.139Z",
-        "status": "new",
-        "blog": 2
     }
 }
 ]

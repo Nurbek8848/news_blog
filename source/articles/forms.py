@@ -1,24 +1,27 @@
 from django.core.exceptions import ValidationError
-from django.forms import widgets, ModelForm
-from django.core.validators import EmailValidator
+from django.forms import widgets, ModelForm, CharField
+from django.core.validators import MinLengthValidator, MinValueValidator
 from articles.models import Article, Blog
 
 
 class ArticleForm(ModelForm):
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #
-    #     for field in self.fields.values():
-    #         field.widget.attrs['class'] = 'form-control'
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.fields["content"].widget.attrs.update({
+        #     "style": "min-height: 120px",
+        # })
+
+        # for field in self.fields.values():
+        #     field.widget.attrs['class'] = 'form-control'
 
 
     class Meta:
         model = Article
         fields = ["title", "content", "author", "status", "blog"]
 
-        widgets = {
-            "content": widgets.Textarea(attrs={"cols": "40", "rows": "5"}),
-        }
+        # widgets = {
+        #     "content": widgets.Textarea(attrs={"cols": "40", "rows": "5"}),
+        # }
 
     def clean(self):
         title = self.cleaned_data.get("title")
