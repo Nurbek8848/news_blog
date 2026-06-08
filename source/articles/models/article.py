@@ -1,4 +1,5 @@
 from django.db import models
+from articles.models import BaseModel
 
 
 status_choices = [('new', 'Новая'), ('approved', 'Одобрено'),  ('Return_for_revision', 'Отправлено на доработку')]
@@ -12,7 +13,7 @@ class Blog(models.Model):
 
 
 
-class Article(models.Model):
+class Article(BaseModel):
     title = models.CharField(max_length=200, null=False, blank=False, verbose_name="Заголовок")
     content = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Описание")
     author = models.CharField(max_length=100, null=False, blank=False, verbose_name="Автор")

@@ -26,6 +26,20 @@
             </button>
         </div>
     </div>
+        <div class="card my-5">
+        <div class="card-body">
+            {% for comment in article.comments.all %}
+                <p>{{ comment }}</p>
+                {% empty %}
+                <p>Комментариев нет</p>
+            {% endfor %}
+        </div>
+        <div class="text-end me-3 mb-3">
+            <a href="#" class="btn btn-outline-warning">
+                <span>Добавить</span>
+            </a>
+        </div>
+    </div>
     {% include 'partial/article_delete_modal.html' with article=article %}
 
 {% endblock %}
