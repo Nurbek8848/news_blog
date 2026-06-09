@@ -1,48 +1,59 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
+from django.views import View
+from django.views.generic import TemplateView
 
 from articles.forms import ArticleForm
 from articles.models import Article
-from articles.validators import validate_article
 
 
-def articles(request):
-    articles = Article.objects.all().order_by('-created_at')
-    context = {'articles': articles}
-    return render(request, "articles/index.html", context)
+class ArticleListView(TemplateView):
+    template_name = "articles/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['articles'] = Article.objects.all().order_by('-created_at')
+        return context
 
 
-def article(request, *args, pk, **kwargs):
-    article = get_object_or_404(Article, pk=pk)
-    context = {'article': article}
-    return render(request, "articles/article_view.html", context)
+class ArticleDetailView(View):
+    def get(self, request, *args, **kwargs):
+        article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
+        context = {'article': article}
+        return render(request, "articles/article_view.html", context)
 
 
-def article_create_view(request):
-    form = ArticleForm()
-    if request.method == 'GET':
+class ArticleCreateView(View):
+    def get(self, request, *args, **kwargs):
+        form = ArticleForm()
         return render(request, 'articles/article_create.html', {'form': form})
-    elif request.method == 'POST':
+
+    def post(self, request, *args, **kwargs):
         form = ArticleForm(request.POST)
+
         if form.is_valid():
             article = form.save()
+            article.tags.set(form.cleaned_data['tags'])
             return redirect("detail", pk=article.pk)
-        else:
-            return render(request, 'articles/article_create.html', {'form': form})
-        # return redirect("list")
+        return render(request, 'articles/article_create.html', {'form': form})
 
 
-def article_update_view(request, pk, *args, **kwargs):
-    article = get_object_or_404(Article, pk=pk)
-    form = ArticleForm(instance=article)
-    context = {'form': form}
+class ArticleUpdateView(View):
+    def dispatch(self, request, *args, **kwargs):
+        self.article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
+        return super().dispatch(request, *args, **kwargs)
 
-    if request.method == 'GET':
+    def get(self, request, pk, *args, **kwargs):
+        form = ArticleForm(instance=self.article)
+        context = {'form': form}
         return render(request, 'articles/article_update.html', context)
-    elif request.method == 'POST':
-        form = ArticleForm(request.POST, instance=article)
+
+    def post(self, request, *args, **kwargs):
+        form = ArticleForm(request.POST, instance=self.article)
+
         if form.is_valid():
             article = form.save()
+            article.tags.set(form.cleaned_data['tags'])
+            article.save()
             return redirect("detail", pk=article.pk)
         return render(request, 'articles/article_update.html', {'form': form})
 

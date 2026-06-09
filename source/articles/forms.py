@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.forms import widgets, ModelForm, CharField
 from django.core.validators import MinLengthValidator, MinValueValidator
-from articles.models import Article, Blog
+from articles.models import Article
 
 
 class ArticleForm(ModelForm):
@@ -17,7 +17,7 @@ class ArticleForm(ModelForm):
 
     class Meta:
         model = Article
-        fields = ["title", "content", "author", "status", "blog"]
+        fields = ["title", "content", "author", "status", "tags"]
 
         # widgets = {
         #     "content": widgets.Textarea(attrs={"cols": "40", "rows": "5"}),
@@ -38,9 +38,9 @@ class ArticleForm(ModelForm):
             raise ValidationError("Недопустимый заголовок")
         return title
 
-    def save(self, commit=True):
-        instance = super().save(commit=False)
-        blog = self.cleaned_data["blog"]
-        instance.blog = blog
-        instance.save()
-        return instance
+    # def save(self, commit=True):
+    #     instance = super().save(commit=False)
+    #     blog = self.cleaned_data["blog"]
+    #     instance.blog = blog
+    #     instance.save()
+    #     return instance
