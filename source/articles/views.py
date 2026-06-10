@@ -17,7 +17,7 @@ class ArticleListView(TemplateView):
 
 class ArticleDetailView(View):
     def get(self, request, *args, **kwargs):
-        article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
+        article = get_object_or_404(Article, slug=self.kwargs.get('slug'))
         context = {'article': article}
         return render(request, "articles/article_view.html", context)
 
@@ -31,7 +31,12 @@ class ArticleCreateView(View):
         form = ArticleForm(request.POST)
 
         if form.is_valid():
-            article = form.save()
+            article = Article(
+                title=form.cleaned_data.get("title"),
+                content=form.cleaned_data.get("content"),
+                author=form.cleaned_data.get("author"),
+            )
+            article.save()
             article.tags.set(form.cleaned_data['tags'])
             return redirect("detail", pk=article.pk)
         return render(request, 'articles/article_create.html', {'form': form})
@@ -43,18 +48,27 @@ class ArticleUpdateView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, pk, *args, **kwargs):
-        form = ArticleForm(instance=self.article)
+        form = ArticleForm(
+            initial={
+                'title': self.article.title,
+                'author': self.article.author,
+                'content': self.article.content,
+                # 'tags': self.article.tags.all()
+            })
+        form.set_initial_tags(self.article.tags.all())
         context = {'form': form}
         return render(request, 'articles/article_update.html', context)
 
     def post(self, request, *args, **kwargs):
-        form = ArticleForm(request.POST, instance=self.article)
+        form = ArticleForm(request.POST)
 
         if form.is_valid():
-            article = form.save()
-            article.tags.set(form.cleaned_data['tags'])
-            article.save()
-            return redirect("detail", pk=article.pk)
+            self.article.title = form.cleaned_data.get("title")
+            self.article.content = form.cleaned_data.get("content")
+            self.article.author = form.cleaned_data.get("author")
+            self.article.tags.set(form.cleaned_data['tags'])
+            self.article.save()
+            return redirect("detail", pk=self.article.pk)
         return render(request, 'articles/article_update.html', {'form': form})
 
 

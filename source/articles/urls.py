@@ -11,7 +11,7 @@ from articles.views import (
 urlpatterns = [
     path("", ArticleListView.as_view(), name="list"),
     path("articles/add/", ArticleCreateView.as_view(), name="create"),
-    path("article/<int:pk>/", ArticleDetailView.as_view(), name="detail"),
+    path("article/<slug:slug>/", ArticleDetailView.as_view(), name="detail"),
     path("article/<int:pk>/update/", ArticleUpdateView.as_view(), name="update"),
     path("article/<int:pk>/delete/", article_delete_view, name="delete"),
 ]

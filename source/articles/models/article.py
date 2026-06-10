@@ -1,4 +1,6 @@
 from django.db import models
+from pytils.translit import slugify
+
 from articles.models import BaseModel
 
 
@@ -6,7 +8,7 @@ status_choices = [('new', 'Новая'), ('approved', 'Одобрено'),  ('Re
 
 
 class Article(BaseModel):
-    title = models.CharField(max_length=200, null=False, blank=False, verbose_name="Заголовок")
+    title = models.CharField(max_length=200, null=False, blank=False, verbose_name="Заголовок", unique=True)
     content = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Описание")
     author = models.CharField(max_length=100, null=False, blank=False, verbose_name="Автор")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="дата создания")
@@ -20,6 +22,12 @@ class Article(BaseModel):
         through_fields=("article", "tag"),
         verbose_name="Теги"
     )
+    slug = models.SlugField(max_length=100, unique=True, null=True, blank=True, verbose_name="Слаг")
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return self.title

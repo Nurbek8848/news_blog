@@ -9,7 +9,7 @@
     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for article in articles %}
             <div class="col">
-            <a href="{% url 'detail' article.pk %}" class="card-link">
+            <a href="{% url 'detail' article.slug %}" class="card-link">
                 <div class="card card-list border-secondary h-100 mb-3">
                     <div class="card-header d-flex justify-content-between">
                         <h5 class="card-title">{{ article.title }}</h5>
