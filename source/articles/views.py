@@ -15,11 +15,11 @@ class ArticleListView(TemplateView):
         return context
 
 
-class ArticleDetailView(View):
-    def get(self, request, *args, **kwargs):
-        article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
-        context = {'article': article}
-        return render(request, "articles/article_view.html", context)
+class ArticleDetailView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['article'] = get_object_or_404(Article, pk=self.kwargs.get('pk'))
+        return context
 
 
 class ArticleCreateView(View):
@@ -57,9 +57,8 @@ class ArticleUpdateView(View):
             return redirect("detail", pk=article.pk)
         return render(request, 'articles/article_update.html', {'form': form})
 
-
-def article_delete_view(request, pk, *args, **kwargs):
-    if request.method == 'POST':
-        article = get_object_or_404(Article, pk=pk)
+class ArticleDeleteView(View):
+    def post(self, request, *args, **kwargs):
+        article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
         article.delete()
-    return redirect("list")
+        return redirect("list")
