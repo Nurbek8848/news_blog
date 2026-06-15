@@ -28,9 +28,12 @@
         </div>
     </div>
         <div class="card my-5">
+        <div class="card-header">
+            Комментарии
+        </div>
         <div class="card-body">
-            {% for comment in article.comments.all %}
-                <p>{{ comment }}</p>
+            {% for comment in comments %}
+                <p>{{ forloop.counter }}. {{ comment }}</p>
                 {% empty %}
                 <p>Комментариев нет</p>
             {% endfor %}

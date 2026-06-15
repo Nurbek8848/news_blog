@@ -1,10 +1,10 @@
 from urllib.parse import urlencode
 
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import FormView, ListView, DetailView, CreateView
 
 from articles.forms import ArticleForm, SimpleSearchForm
 from articles.models import Article
@@ -51,23 +51,23 @@ class ArticleListView(ListView):
 
 
 
-class ArticleDetailView(TemplateView):
+class ArticleDetailView(DetailView):
     template_name = "articles/article_view.html"
+    model = Article
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['article'] = get_object_or_404(Article, pk=self.kwargs.get('pk'))
+        context['comments'] = self.object.comments.filter(author='asdqwe')
         return context
 
 
-class ArticleCreateView(FormView):
+class ArticleCreateView(CreateView):
     template_name = "articles/article_create.html"
     form_class = ArticleForm
-    success_url = reverse_lazy("list")
+    # success_url = reverse_lazy("list")
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+    def get_success_url(self):
+        return reverse("detail", kwargs={"pk": self.object.pk})
 
 
 class ArticleUpdateView(FormView):

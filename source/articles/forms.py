@@ -10,6 +10,9 @@ class ArticleForm(ModelForm):
     class Meta:
         model = Article
         fields = ["title", "content", "author", "tags"]
+        widgets = {
+            'tags': CheckboxSelectMultiple(),
+        }
 
     def clean(self):
         cleaned_data = super().clean()
