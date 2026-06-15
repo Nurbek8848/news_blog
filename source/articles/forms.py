@@ -1,3 +1,4 @@
+from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.forms.widgets import CheckboxSelectMultiple
@@ -37,3 +38,7 @@ class ArticleStatusForm(ModelForm):
         widgets = {
             'tags': CheckboxSelectMultiple(),
         }
+
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label="")
