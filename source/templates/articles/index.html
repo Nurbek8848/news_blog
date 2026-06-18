@@ -7,9 +7,15 @@
         <h1>Статьи</h1>
         <form class="d-flex" action="" method="GET">
             {{ search_form }}
+            {% if tag %}
+                <input type="hidden" name="tag" value="{{ tag }}">
+            {% endif %}
             <button class="btn btn-sm btn-outline-primary" type="submit">Поиск</button>
         </form>
     </div>
+    {% for tag in tags %}
+        <a href="{% url 'list' %}?tag={{ tag.pk }}" class="me-3 btn btn-sm btn-outline-primary">{{ tag }}</a>
+    {% endfor %}
     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4">
         {% for article in articles %}
             <div class="col">
@@ -24,7 +30,7 @@
                             {% if article.content %}{{ article.content|truncatewords:5 }}{% else %}---{% endif %}</p>
                         <p>Статус: {{ article.get_status_display }}</p>
                         <span>Автор: {% if article.author %}{{ article.author }}{% else %}---{% endif %}</span>
-                        <span>Блог: {% if article.blog %}{{ article.blog.title }}{% else %}---{% endif %}</span>
+                        <p>Теги: {% for tag in article.tags.all %}{{ tag }} {% endfor %}</p>
                     </div>
                     <div class="text-end me-3">
                         <a href="{% url 'update' article.pk %}" class="btn btn-outline-warning">

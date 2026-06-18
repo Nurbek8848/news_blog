@@ -15,6 +15,9 @@
             {% if search_value %}
                 <input type="hidden" name="search" value="{{ search_value }}">
             {% endif %}
+            {% if tag %}
+                <input type="hidden" name="tag" value="{{ tag }}">
+            {% endif %}
         </form>
 
         {% if page_obj.has_next %}

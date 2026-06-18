@@ -1,4 +1,6 @@
 from django.db import models
+
+from articles.manager import ArticleManager
 from articles.models import BaseModel
 
 
@@ -46,6 +48,8 @@ class Article(BaseModel):
         through_fields=("article", "tag"),
         verbose_name="Теги"
     )
+
+    objects = ArticleManager()
 
     def __str__(self):
         return self.title

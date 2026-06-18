@@ -29,6 +29,8 @@
     </div>
 </nav>
 <div class="container">
+    {{ request }}
+    {{ request.user }}
     {% block content %}
     {% endblock %}
 </div>

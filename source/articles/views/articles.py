@@ -7,7 +7,7 @@ from django.views import View
 from django.views.generic import FormView, ListView, DetailView, CreateView
 
 from articles.forms import ArticleForm, SimpleSearchForm
-from articles.models import Article
+from articles.models import Article, Tag
 
 
 class ArticleListView(ListView):
@@ -22,6 +22,8 @@ class ArticleListView(ListView):
     def dispatch(self, request, *args, **kwargs):
         self.form = self.get_search_form()
         self.search_value = self.get_search_value()
+        self.tag = self.request.GET.get("tag")
+        print(self.tag)
         return super().dispatch(request, *args, **kwargs)
 
     def get_search_form(self):
@@ -38,15 +40,27 @@ class ArticleListView(ListView):
             queryset = queryset.filter(
                 Q(title__icontains=self.search_value) | Q(author__icontains=self.search_value)
             )
+
+        if self.tag:
+            queryset = queryset.filter(tags__id=self.tag)
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_form'] = self.form
+        context['tags'] = Tag.objects.all()
+        query_params = {}
 
         if self.search_value:
-            context['query'] = urlencode({"search": self.search_value})
+            query_params.update({"search": self.search_value})
             context['search_value'] = self.search_value
+
+        if self.tag:
+            query_params.update({"tag": self.tag})
+            context['tag'] = self.tag
+
+        if query_params:
+            context['query'] = urlencode(query_params)
         return context
 
 
@@ -58,6 +72,7 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comments'] = self.object.comments.filter(author='asdqwe')
+        context['tags'] = Tag.objects.all()
         return context
 
 
@@ -65,9 +80,15 @@ class ArticleCreateView(CreateView):
     template_name = "articles/article_create.html"
     form_class = ArticleForm
     # success_url = reverse_lazy("list")
+    # extra_context = {'tags': Tag.objects.all()}
 
     def get_success_url(self):
         return reverse("detail", kwargs={"pk": self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+        return context
 
 
 class ArticleUpdateView(FormView):
