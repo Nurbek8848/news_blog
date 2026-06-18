@@ -6,6 +6,7 @@ from articles.views import (
     ArticleListView,
     ArticleCreateView,
     ArticleUpdateView,
+    CommentCreateView,
 )
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path("article/<int:pk>/", ArticleDetailView.as_view(), name="detail"),
     path("article/<int:pk>/update/", ArticleUpdateView.as_view(), name="update"),
     path("article/<int:pk>/delete/", ArticleDeleteView.as_view(), name="delete"),
+    path("article/<int:pk>/comment-add/", CommentCreateView.as_view(), name="comment-create"),
 ]

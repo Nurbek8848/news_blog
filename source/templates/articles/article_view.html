@@ -22,9 +22,12 @@
             <a href="{% url 'update' article.pk %}" class="btn btn-outline-warning">
                 <span>Изменить</span><i class="fa-regular fa-pen-to-square ms-2"></i>
             </a>
-            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#article-{{ article.pk }}-Modal">
-                <span>Удалить</span><i class="fa-regular fa-trash-can ms-2"></i>
-            </button>
+            <a href="{% url 'delete' article.pk %}" class="btn btn-outline-danger">
+                <i class="fa-regular fa-trash-can"></i>
+            </a>
+{#            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#article-{{ article.pk }}-Modal">#}
+{#                <span>Удалить</span><i class="fa-regular fa-trash-can ms-2"></i>#}
+{#            </button>#}
         </div>
     </div>
         <div class="card my-5">
@@ -32,14 +35,14 @@
             Комментарии
         </div>
         <div class="card-body">
-            {% for comment in comments %}
+            {% for comment in article.comments.all %}
                 <p>{{ forloop.counter }}. {{ comment }}</p>
                 {% empty %}
                 <p>Комментариев нет</p>
             {% endfor %}
         </div>
         <div class="text-end me-3 mb-3">
-            <a href="#" class="btn btn-outline-warning">
+            <a href="{% url 'comment-create' article.pk %}" class="btn btn-outline-warning">
                 <span>Добавить</span>
             </a>
         </div>

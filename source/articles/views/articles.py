@@ -2,11 +2,11 @@ from urllib.parse import urlencode
 
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
-from django.views.generic import FormView, ListView, DetailView, CreateView
+from django.views.generic import FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from articles.forms import ArticleForm, SimpleSearchForm
+from articles.forms import ArticleForm, SimpleSearchForm, ArticleDeleteForm
 from articles.models import Article
 
 
@@ -66,32 +66,33 @@ class ArticleCreateView(CreateView):
     form_class = ArticleForm
     # success_url = reverse_lazy("list")
 
-    def get_success_url(self):
-        return reverse("detail", kwargs={"pk": self.object.pk})
+    # def get_success_url(self):
+    #     return reverse("detail", kwargs={"pk": self.object.pk})
 
 
-class ArticleUpdateView(FormView):
+class ArticleUpdateView(UpdateView):
     template_name = "articles/article_update.html"
     form_class = ArticleForm
+    model = Article
+    # queryset = Article.objects.all()
 
-    def dispatch(self, request, *args, **kwargs):
-        self.article = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
+    # def get_success_url(self):
+    #     return reverse("detail", kwargs={"pk": self.object.pk})
 
-    def get_object(self):
-        return get_object_or_404(Article, pk=self.kwargs.get('pk'))
+class ArticleDeleteView(DeleteView):
+    template_name = "articles/delete_confirm.html"
+    model = Article
+    form_class = ArticleDeleteForm
+    success_url = reverse_lazy("list")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['instance'] = self.article
+
+        if self.request.method == 'POST':
+            kwargs['instance'] = self.object
         return kwargs
 
-    def form_valid(self, form):
-        article = form.save()
-        return redirect("detail", pk=article.pk)
-
-class ArticleDeleteView(View):
-    def post(self, request, *args, **kwargs):
-        article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
-        article.delete()
-        return redirect("list")
+    # def post(self, request, *args, **kwargs):
+    #     article = get_object_or_404(Article, pk=self.kwargs.get('pk'))
+    #     article.delete()
+    #     return redirect("list")

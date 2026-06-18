@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.forms.widgets import CheckboxSelectMultiple
 
-from articles.models import Article
+from articles.models import Article, Comment
 
 
 class ArticleForm(ModelForm):
@@ -45,3 +45,22 @@ class ArticleStatusForm(ModelForm):
 
 class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label="")
+
+
+class ArticleDeleteForm(ModelForm):
+    class Meta:
+        model = Article
+        fields = ["title"]
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+
+        if title == self.instance.title:
+            return title
+        raise ValidationError("Название статьи не совпадает с оригиналом")
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["text", "author"]
