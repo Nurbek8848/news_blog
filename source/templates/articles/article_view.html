@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block nav %}
-    <a class="nav-link" href="{% url 'create' %}">Добавить статью</a>
+    <a class="nav-link" href="{% url 'articles:create' %}">Добавить статью</a>
 {% endblock %}
 {% block content %}
     <div class="card my-5">
@@ -42,7 +42,7 @@
             {% endfor %}
         </div>
         <div class="text-end me-3 mb-3">
-            <a href="{% url 'comment-create' article.pk %}" class="btn btn-outline-warning">
+            <a href="{% url 'articles:comment-create' article.pk %}" class="btn btn-outline-warning">
                 <span>Добавить</span>
             </a>
         </div>

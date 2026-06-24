@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'articles',
+    'accounts',
 
     'django_bootstrap5'
 ]
@@ -143,3 +144,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'articles:list'
+LOGOUT_REDIRECT_URL = 'articles:list'

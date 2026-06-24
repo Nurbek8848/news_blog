@@ -9,6 +9,7 @@ from articles.views import (
     CommentCreateView,
 )
 
+app_name = "articles"
 urlpatterns = [
     path("", ArticleListView.as_view(), name="list"),
     path("articles/add/", ArticleCreateView.as_view(), name="create"),

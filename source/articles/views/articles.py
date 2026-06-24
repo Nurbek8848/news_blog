@@ -1,5 +1,6 @@
 from urllib.parse import urlencode
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
@@ -61,13 +62,9 @@ class ArticleDetailView(DetailView):
         return context
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     template_name = "articles/article_create.html"
     form_class = ArticleForm
-    # success_url = reverse_lazy("list")
-
-    # def get_success_url(self):
-    #     return reverse("detail", kwargs={"pk": self.object.pk})
 
 
 class ArticleUpdateView(UpdateView):
@@ -83,7 +80,7 @@ class ArticleDeleteView(DeleteView):
     template_name = "articles/delete_confirm.html"
     model = Article
     form_class = ArticleDeleteForm
-    success_url = reverse_lazy("list")
+    success_url = reverse_lazy("articles:list")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

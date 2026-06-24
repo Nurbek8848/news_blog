@@ -7,7 +7,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Вы уверены что хотите удалить статтью "{{ article.title }}"</p>
-                    <form action="{% url 'delete' article.pk %}" id="delete-form-{{ article.pk }}" method="post">
+                    <form action="{% url 'articles:delete' article.pk %}" id="delete-form-{{ article.pk }}" method="post">
                         {% csrf_token %}
                     </form>
                 </div>
