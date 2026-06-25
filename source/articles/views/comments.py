@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404
-from django.urls import reverse
 from django.views.generic import CreateView
 
 from articles.forms import CommentForm
@@ -19,4 +18,5 @@ class CommentCreateView(CreateView):
     def form_valid(self, form):
         artice = get_object_or_404(Article, pk=self.kwargs["pk"])
         form.instance.article = artice
+        form.instance.author = self.request.user
         return super().form_valid(form)

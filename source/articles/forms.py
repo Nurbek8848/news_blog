@@ -9,7 +9,7 @@ from articles.models import Article, Comment
 class ArticleForm(ModelForm):
     class Meta:
         model = Article
-        fields = ["title", "content", "author", "tags"]
+        fields = ["title", "content", "tags"]
         widgets = {
             'tags': CheckboxSelectMultiple(),
         }
@@ -36,7 +36,7 @@ class ArticleForm(ModelForm):
 class ArticleStatusForm(ModelForm):
     class Meta:
         model = Article
-        fields = ["title", "content", "author", "tags", "status"]
+        fields = ["title", "content", "tags", "status"]
 
         widgets = {
             'tags': CheckboxSelectMultiple(),
@@ -63,4 +63,4 @@ class ArticleDeleteForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ["text", "author"]
+        fields = ["text"]

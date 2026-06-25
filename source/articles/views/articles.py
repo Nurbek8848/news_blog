@@ -1,11 +1,9 @@
 from urllib.parse import urlencode
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse, reverse_lazy
-from django.views import View
-from django.views.generic import FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from articles.forms import ArticleForm, SimpleSearchForm, ArticleDeleteForm
 from articles.models import Article
@@ -58,7 +56,7 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = self.object.comments.filter(author='asdqwe')
+        context['comments'] = self.object.comments.all()
         return context
 
 
@@ -66,15 +64,28 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     template_name = "articles/article_create.html"
     form_class = ArticleForm
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = "articles/article_update.html"
     form_class = ArticleForm
     model = Article
-    # queryset = Article.objects.all()
+    permission_required = 'articles.change_article'
 
-    # def get_success_url(self):
-    #     return reverse("detail", kwargs={"pk": self.object.pk})
+    # def has_permission(self):
+    #     if super().has_permission():
+    #         return self.request.user.groups.filter(name='moderator').exists()
+    #     return self.request.user == self.get_object().author
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     user = request.user
+    #     if not user.is_authenticated:
+    #         return redirect('articles:list')
+    #     if not user.has_perm('articles.change_article'):
+    #         raise PermissionDenied
+    #     return super().dispatch(request, *args, **kwargs)
 
 class ArticleDeleteView(DeleteView):
     template_name = "articles/delete_confirm.html"
