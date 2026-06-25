@@ -41,14 +41,22 @@ class ArticleListView(ListView):
             )
         return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['search_form'] = self.form
+    def get_context_data(self, *args, **kwargs):
+        # args = (value_1, value_2, ...)
+        # kwargs = {"key_1": value_1, "key_2": value_2, ...}
+        print()
+        print(kwargs)
+        print()
+        kwargs = super().get_context_data(**kwargs)
+        kwargs['search_form'] = self.form
 
         if self.search_value:
-            context['query'] = urlencode({"search": self.search_value})
-            context['search_value'] = self.search_value
-        return context
+            kwargs['query'] = urlencode({"search": self.search_value})
+            kwargs['search_value'] = self.search_value
+        print()
+        print(kwargs)
+        print()
+        return kwargs
 
 
 
