@@ -21,6 +21,11 @@
                         <a href="{% url 'articles:delete' article.pk %}" class="btn btn-outline-danger">
                             <i class="fa-regular fa-trash-can"></i>
                         </a>
+                        <span id="counter-{{ article.pk }}" class="mx-2">{{ article.likes.count }}</span>
+                        <a id='csrf' href="{% url 'api_v1:token' %}" class="d-none"></a>
+                        <a href="{% url 'api_v1:likes' article.pk %}" class="btn btn-outline-danger" data-action="like" data-counter-id="counter-{{ article.pk }}">
+                            лайк
+                        </a>
 {#                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#article-{{ article.pk }}-Modal">#}
 {#                            <i class="fa-regular fa-trash-can"></i>#}
 {#                        </button>#}

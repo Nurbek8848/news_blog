@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 from django.http.response import HttpResponse, JsonResponse, HttpResponseNotAllowed
+from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic.base import View
 
@@ -51,6 +52,18 @@ class Test(View):
 
     def put(self, request, *args, **kwargs):
         return JsonResponse({'method': 'PUT'})
+
+
+class Articlelike(View):
+    def post(self, request, *args, **kwargs):
+        article = get_object_or_404(Article, id=self.kwargs.get('pk'))
+        if article in request.user.liked_articles.all():
+            article.likes.remove(request.user)
+        else:
+            article.likes.add(request.user)
+
+        return JsonResponse({'count': article.likes.count()})
+
 
 @ensure_csrf_cookie
 def get_token_view(request, *args, **kwargs):
