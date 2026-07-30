@@ -16,12 +16,11 @@ window.onload = function () {
       }
 
     async function makeRequest(url, method = 'GET', body = null) {
-        console.log(method);
 
         let headers = {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookieValue('csrftoken'),
-                'Cookie': 'sessionid=rsy57jzzlorvm307iecavoch1x01a0t0'
+                // 'X-CSRFToken': getCookieValue('csrftoken'),
+                'Authorization': `Token ${getCookieValue('token')}`,
             }
 
         let requestData = {"method": method, "headers": headers};
@@ -31,7 +30,25 @@ window.onload = function () {
         }
 
         let response = await fetch(url, requestData);
-        return await response.json();
+        if (response.ok) {
+            return await response.json();
+        } else {
+            let error = await response.json();
+            console.log(error)
+        }
+
+    }
+
+    async function testArticle(event) {
+        let url = "http://localhost:8001/api/v2/articles/";
+        // let url = event.target.dataset.url;
+        let body = {
+            "title": "from js",
+            "content": "from js",
+            "tags": [1,2]
+        }
+        let response = await makeRequest(url, "POST", body);
+        console.log(response)
     }
 
     async function like(event) {
@@ -44,6 +61,9 @@ window.onload = function () {
         console.log(response.count);
         counter.innerText = response.count;
     }
+
+    let testBtn = document.getElementById("test-btn");
+    testBtn.addEventListener('click', testArticle);
 
     let likeLinks = document.querySelectorAll('[data-action="like"]');
     for (let link of likeLinks) {

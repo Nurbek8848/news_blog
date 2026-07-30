@@ -8,7 +8,7 @@ from api_v2.views import ArticleViewSet
 app_name = 'api_v2'
 
 router = routers.DefaultRouter()
-router.register(r'articles', ArticleViewSet)
+router.register(r'articles', ArticleViewSet, basename='articles')
 
 urlpatterns = [
     path("", include(router.urls)),

@@ -25,6 +25,7 @@
                 <a class="nav-link active" aria-current="page" href="/">Все статьи</a>
                 {% block nav %}
                 {% endblock %}
+                <button id="test-btn">Test</button>
                 {% if request.user.is_authenticated %}
                     <form action="{% url 'accounts:logout' %}?next={{ request.get_full_path }}" method="POST">
                         {% csrf_token %}
