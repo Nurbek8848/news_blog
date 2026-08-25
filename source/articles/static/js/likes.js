@@ -40,14 +40,14 @@ window.onload = function () {
     }
 
     async function testArticle(event) {
-        let url = "http://localhost:8001/api/v2/articles/";
-        // let url = event.target.dataset.url;
+        // let url = "http://127.0.0.1:8001/api/v2/articles/";
+        let url = event.target.dataset.url;
         let body = {
-            "title": "from js",
-            "content": "from js",
-            "tags": [1,2]
+            "title": "edited 134 1111111 from js",
+            "content": "edited 134 1111111 from js",
+            "tags": [1]
         }
-        let response = await makeRequest(url, "POST", body);
+        let response = await makeRequest(url, "PUT", body);
         console.log(response)
     }
 
@@ -62,8 +62,10 @@ window.onload = function () {
         counter.innerText = response.count;
     }
 
+    let testDetailBtn = document.getElementById("test-detail-btn");
     let testBtn = document.getElementById("test-btn");
     testBtn.addEventListener('click', testArticle);
+    testDetailBtn.addEventListener('click', testArticle);
 
     let likeLinks = document.querySelectorAll('[data-action="like"]');
     for (let link of likeLinks) {

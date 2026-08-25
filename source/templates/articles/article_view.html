@@ -5,6 +5,7 @@
 {% block content %}
     <div class="card my-5">
         <div class="card-header fs-4 text-center">{{ article.title }}</div>
+    <button id="test-detail-btn" data-url="{% url 'api_v2:articles-detail' article.pk %}">Test</button>
         <div class="card-body">
             <figure>
                 <blockquote class="blockquote">
