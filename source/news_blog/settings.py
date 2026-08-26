@@ -30,7 +30,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 DEBUG = env.bool('DEBUG')
 
 ALLOWED_HOSTS = [
-    '.ngrok-free.app', '165.245.242.151'
+    '64.226.119.189'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
