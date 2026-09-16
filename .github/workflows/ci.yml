@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  tests:
 
     runs-on: ubuntu-latest
     env:
@@ -42,3 +42,24 @@ jobs:
       - name: Run Tests
         run: |
           python source/manage.py test
+
+  publish:
+    needs: tests
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update server
+        uses: appleboy/ssh-action@v1
+        env:
+          WORK_DIR: ${{ secrets.WORK_DIR }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          envs: WORK_DIR
+          script: |
+            set -e
+            cd "$WORK_DIR"
+            git pull --ff-only origin main
+            docker compose up --build -d
