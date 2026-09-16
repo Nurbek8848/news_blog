@@ -4,3 +4,5 @@ django-bootstrap5==26.2
 pillow==12.2.0
 djangorestframework==3.17.1
 psycopg[binary]
+huey==3.4.0
+redis==8.1.0

@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'rest_framework',
     'rest_framework.authtoken',
+    'huey.contrib.djhuey',
 ]
 
 MIDDLEWARE = [
@@ -118,6 +119,17 @@ DATABASES = {
     'default': env.db('DB_URL')
 }
 
+HUEY = {
+    'huey_class': 'huey.RedisHuey',  # Use Redis backend
+    'name': 'articles_project',  # Unique queue name
+    'immediate': False,  # If True, tasks run synchronously (great for local tests)
+    'url': env.str('REDIS_URL'),
+    'consumer': {
+        'workers': 2,  # Number of worker threads/processes
+        'worker_type': 'thread',  # 'thread', 'process', or 'greenlet'
+    },
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -160,6 +172,11 @@ LOGGING = {
         "django.request": {
             "handlers": ["console"],
             "level": "ERROR",
+            "propagate": False,
+        },
+        "articles.tasks": {
+            "handlers": ["console"],
+            "level": "INFO",
             "propagate": False,
         },
     },

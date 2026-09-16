@@ -1,19 +1,19 @@
 services:
-#  nginx:
-#    build:
-#      context: .
-#      dockerfile: source/Dockerfile
-#    ports:
-#      - "8080:80"
-#    container_name: nginx1
-#
-#  nginx2:
-#    image: "nginx:alpine"
-#    ports:
-#      - "8081:80"
-#    container_name: nginx2
-#    volumes:
-#      - ./source/index.html:/usr/share/nginx/html/index.html
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+
+  huey:
+    build:
+      context: .
+      dockerfile: source/Dockerfile
+    env_file:
+      - ./source/.env
+    depends_on:
+      - db
+      - redis
+    command: python3 manage.py run_huey
+    restart: unless-stopped
 
   db:
     image: postgres:17
