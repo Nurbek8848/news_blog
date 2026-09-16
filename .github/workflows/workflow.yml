@@ -20,9 +20,9 @@ jobs:
       postgres:
         image: postgres:17
         env:
-          POSTGRES_DB: 'articles_db'
-          POSTGRES_USER: 'ci'
-          POSTGRES_HOST: 'ci'
+          POSTGRES_DB: articles_db
+          POSTGRES_USER: ci
+          POSTGRES_HOST: ci
         ports:
           - 5432:5432
       redis:
