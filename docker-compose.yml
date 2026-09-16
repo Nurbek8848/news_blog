@@ -20,7 +20,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - .vloumes/db_data:/var/lid/postgres/data
+      - ./.vloumes/db_data:/var/lid/postgres/data
     env_file:
       - ./source/.env
     restart: always

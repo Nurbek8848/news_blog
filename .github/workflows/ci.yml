@@ -56,7 +56,6 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           envs: WORK_DIR
           script: |
             set -e
