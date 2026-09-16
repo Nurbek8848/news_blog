@@ -14,7 +14,7 @@ jobs:
       SECRET_KEY: ci-only-secret-key
       DEBUG: "False"
       DB_URL: postgresql://ci:ci@127.0.0.1:5432/articles_ci
-#      REDIS_URL: redis://127.0.0.1:6379/1
+      REDIS_URL: redis://127.0.0.1:6379/1
 
     services:
       postgres:
@@ -25,10 +25,10 @@ jobs:
           POSTGRES_PASSWORD: ci
         ports:
           - 5432:5432
-#      redis:
-#        image: redis:7-alpine
-#        ports:
-#          - 6379:6379
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
 
     steps:
       - uses: actions/checkout@v4
