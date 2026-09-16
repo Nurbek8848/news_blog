@@ -16,19 +16,19 @@ jobs:
       DB_URL: postgresql://ci:ci@127.0.0.1:5432/articles_ci
       REDIS_URL: redis://127.0.0.1:6379/1
 
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_DB: articles_ci
-          POSTGRES_USER: ci
-          POSTGRES_PASSWORD: ci
-        ports:
-          - 5432:5432
-      redis:
-        image: redis:7-alpine
-        ports:
-          - 6379:6379
+#    services:
+#      postgres:
+#        image: postgres:17
+#        env:
+#          POSTGRES_DB: articles_ci
+#          POSTGRES_USER: ci
+#          POSTGRES_PASSWORD: ci
+#        ports:
+#          - 5432:5432
+#      redis:
+#        image: redis:7-alpine
+#        ports:
+#          - 6379:6379
 
     steps:
       - uses: actions/checkout@v4
@@ -61,4 +61,3 @@ jobs:
             set -e
             cd "$WORK_DIR"
             git pull --ff-only origin main
-            docker compose up --build -d
