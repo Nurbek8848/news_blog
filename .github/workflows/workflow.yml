@@ -13,18 +13,18 @@ jobs:
     env:
       SECRET_KEY: ci-only-secret-key
       DEBUG: "False"
-#      DB_URL: postgresql://ci:ci@127.0.0.1:5432/articles_ci
+      DB_URL: postgresql://ci:ci@127.0.0.1:5432/articles_ci
 #      REDIS_URL: redis://127.0.0.1:6379/1
 
-#    services:
-#      postgres:
-#        image: postgres:17
-#        env:
-#          POSTGRES_DB: articles_ci
-#          POSTGRES_USER: ci
-#          POSTGRES_PASSWORD: ci
-#        ports:
-#          - 5432:5432
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: articles_ci
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+        ports:
+          - 5432:5432
 #      redis:
 #        image: redis:7-alpine
 #        ports:
